@@ -1,0 +1,25 @@
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+        Currency currency = new Currency();
+        List<Currency> currencyList = new ArrayList<>();
+        CurrencyParse currencyParse = new CurrencyParse(currencyList);
+        try {
+            currencyParse.parseXMLCurrency();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        }
+        System.out.println(currencyList);
+
+    }
+}
