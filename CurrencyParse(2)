@@ -1,0 +1,57 @@
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.w3c.dom.*;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+public class CurrencyParse {
+    final private String url = " https://obmin.khmelnitskiy.ua/ru?gclid=Cj0KCQjw6PD3BRDPARIsAN8pHuG9eNUmhKvv-4Vi2QxdggigT6vY_1myZ2qURgZ3pP13TBO-PDvTv1caAkmXEALw_wcB";
+    private List<Currency> currencies = new ArrayList<>();
+
+    public CurrencyParse(List<Currency> currencies) {
+        this.currencies = currencies;
+    }
+
+    public CurrencyParse() {
+        super();
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public List<Currency> getCurrencies() {
+        return currencies;
+    }
+
+    public void setCurrencies(List<Currency> currencies) {
+        this.currencies = currencies;
+    }
+
+    public void parseXMLCurrency() throws ParserConfigurationException, IOException, SAXException {
+        DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        Document document = builder.parse(url);
+        Node root = (Node) document.getDocumentElement();
+        NodeList nodeList = root.getChildNodes();
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Node node = nodeList.item(i);
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
+                Element element = (Element) node;
+                NamedNodeMap attres = element.getChildNodes().item(0).getAttributes();
+                Currency currency = new Currency();
+                currency.setBaseCurrency(attres.getNamedItem("base_currency").getTextContent());
+                currency.setCurrency(attres.getNamedItem("currency").getTextContent());
+                currency.setBuy(attres.getNamedItem("buy").getTextContent());
+                currency.setSale(attres.getNamedItem("sale").getTextContent());
+                currencies.add(currency);
+            }
+        }
+
+
+    }
+}
