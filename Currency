@@ -1,0 +1,59 @@
+public class Currency {
+    private String baseCurrency;
+    private String currency;
+    private String  buy;
+    private String  sale;
+
+    public Currency(String baseCurrency, String currency, String buy, String sale) {
+        this.baseCurrency = baseCurrency;
+        this.currency = currency;
+        this.buy = buy;
+        this.sale = sale;
+    }
+
+    public Currency() {
+        super();
+    }
+
+    public String getBaseCurrency() {
+        return baseCurrency;
+    }
+
+    public void setBaseCurrency(String baseCurrency) {
+        this.baseCurrency = baseCurrency;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+    public String getBuy() {
+        return buy;
+    }
+
+    public void setBuy(String buy) {
+        this.buy = buy;
+    }
+
+    public String getSale() {
+        return sale;
+    }
+
+    public void setSale(String sale) {
+        this.sale = sale;
+    }
+
+    @Override
+    public String   toString() {
+        return "Currency{" +
+                "baseCurrency='" + baseCurrency + '\'' +
+                ", currency='" + currency + '\'' +
+                ", buy=" + buy +
+                ", sale=" + sale +
+                '}';
+    }
+}
